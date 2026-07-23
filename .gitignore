@@ -1,0 +1,14 @@
+__pycache__/
+*.pyc
+
+reports/html/*
+reports/json/*
+reports/screenshots/*
+
+!reports/html/.gitkeep
+!reports/json/.gitkeep
+!reports/screenshots/.gitkeep
+
+.idea/
+.vscode/
+.DS_Store
