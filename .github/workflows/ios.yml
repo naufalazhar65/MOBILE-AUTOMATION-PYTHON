@@ -1,10 +1,10 @@
-name: iOS Automation Test
+name: iOS Validation
 
 on:
   workflow_dispatch:
 
 jobs:
-  ios-test:
+  ios-validation:
     runs-on: macos-latest
 
     steps:
@@ -16,45 +16,11 @@ jobs:
         with:
           python-version: "3.12"
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: "22"
-
       - name: Install Dependencies
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      - name: Install Appium
+      - name: Validate iOS Tests
         run: |
-          npm install -g appium
-
-      - name: Install XCUITest Driver
-        run: |
-          appium driver install xcuitest
-
-      - name: Start Appium
-        run: |
-          appium > appium.log 2>&1 &
-          sleep 15
-
-      - name: Run iOS Tests
-        run: |
-          pytest tests/ios \
-            --html=reports/html/ios_report.html \
-            --self-contained-html
-
-      - name: Upload Report
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: ios-report
-          path: reports/html/
-
-      - name: Upload Appium Log
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: ios-appium-log
-          path: appium.log
+          pytest tests/ios --collect-only

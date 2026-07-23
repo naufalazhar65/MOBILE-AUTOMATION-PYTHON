@@ -12,3 +12,23 @@ reports/screenshots/*
 .idea/
 .vscode/
 .DS_Store
+.env# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+
+# Virtual Environment
+.venv/
+
+# Reports
+reports/
+
+# Environment
+.env
+
+# macOS
+.DS_Store
+
+# IDE
+.vscode/
+.idea/

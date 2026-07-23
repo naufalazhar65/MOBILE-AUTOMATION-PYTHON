@@ -8,7 +8,7 @@ def pytest_addoption(parser):
     parser.addoption(
         "--platform",
         action="store",
-        default="android",
+        default=None,
         help="android | ios"
     )
 
@@ -17,6 +17,16 @@ def pytest_addoption(parser):
 def driver(request):
 
     platform = request.config.getoption("--platform")
+
+    if platform is None:
+        test_path = str(request.fspath)
+
+        if "tests/ios" in test_path:
+            platform = "ios"
+        elif "tests/android" in test_path:
+            platform = "android"
+        else:
+            platform = "android"
 
     driver = DriverFactory.create(platform)
 

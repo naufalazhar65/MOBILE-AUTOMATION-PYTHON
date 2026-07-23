@@ -3,3 +3,6 @@ pytest>=8.4.0
 pytest-html
 pytest-json-report
 selenium>=4.34.2
+requests
+python-dotenv
+pytest-json-report
