@@ -688,7 +688,7 @@ The notification includes:
 > Coming Soon
 
 <!--
-![Telegram Notification](docs/images/telegram-report.png)
+![Telegram Notification](/Users/naufalazhar/Documents/PROJECT/SELENIUM-PYTHON-MOBILE/docs/images/telegram-report.png)
 -->
 
 ---
