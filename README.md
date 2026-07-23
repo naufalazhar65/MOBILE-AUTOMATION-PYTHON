@@ -671,41 +671,27 @@ The notification includes:
 
 ---
 
-# 📸 Framework Preview
-
-## HTML Report
-
-> Coming Soon
-
-<!--
-![HTML Report](docs/images/html-report.png)
--->
-
----
-
-## Telegram Notification
+## 📷 Framework Preview
 
 <p align="center">
-  <a href="docs/images/telegram-report.png">
-    <img src="docs/images/telegram-report.png" width="350">
-  </a>
+
+<b>Telegram Notification</b><br>
+
+<img src="docs/images/telegram-report.png" width="300">
+
+<br><br>
+
+<b>HTML Report</b><br>
+
+<img src="docs/images/html-report.png" width="900">
+
+<br><br>
+
+<b>Project Structure</b><br>
+
+<img src="docs/images/project-structure.png" width="900">
+
 </p>
-
-<p align="center">
-  <i>Click the image to view the full size.</i>
-</p>
-
----
-
-## Screenshot on Failure
-
-> Coming Soon
-
-<!--
-![Failure Screenshot](docs/images/failure.png)
--->
-
----
 
 # 📊 Reporting
 
