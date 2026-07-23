@@ -685,10 +685,9 @@ The notification includes:
 
 ## Telegram Notification
 
-> Coming Soon
 
 <p align="center">
-  <img src="docs/images/telegram-report.png" width="900">
+  <img src="docs/images/telegram-report.png" width="300">
 </p>
 
 ---
