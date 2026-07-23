@@ -685,9 +685,14 @@ The notification includes:
 
 ## Telegram Notification
 
+<p align="center">
+  <a href="docs/images/telegram-report.png">
+    <img src="docs/images/telegram-report.png" width="350">
+  </a>
+</p>
 
 <p align="center">
-  <img src="docs/images/telegram-report.png" width="300">
+  <i>Click the image to view the full size.</i>
 </p>
 
 ---
