@@ -10,7 +10,7 @@
 [![Platform](https://img.shields.io/badge/Platform-Android%20%7C%20iOS-success)]()
 [![License](https://img.shields.io/badge/License-MIT-green)]()
 
-A scalable and maintainable mobile automation testing framework built with **Python**, **Pytest**, **Appium 2**, and the **Page Object Model (POM)** design pattern.
+A scalable and maintainable cross-platform mobile automation testing framework built with **Python**, **Pytest**, **Appium 2**, and the **Page Object Model (POM)** design pattern.
 
 </div>
 
@@ -20,13 +20,17 @@ A scalable and maintainable mobile automation testing framework built with **Pyt
 
 - [Overview](#-overview)
 - [Features](#-features)
+- [Supported Platforms](#-supported-platforms)
 - [Project Structure](#-project-structure)
 - [Architecture](#-architecture)
 - [Technology Stack](#-technology-stack)
 - [Installation](#-installation)
 - [Prerequisites](#-prerequisites)
+- [Test Applications](#-test-applications)
+- [Configuration](#-configuration)
 - [Running Tests](#-running-tests)
 - [Reports](#-reports)
+- [Screenshot on Failure](#-screenshot-on-failure)
 - [Design Pattern](#-design-pattern)
 - [Future Improvements](#-future-improvements)
 - [Author](#-author)
@@ -37,27 +41,38 @@ A scalable and maintainable mobile automation testing framework built with **Pyt
 
 This project is a cross-platform mobile automation testing framework for Android and iOS applications.
 
-The framework is built with scalability, maintainability, and code reusability in mind by implementing the **Page Object Model (POM)** design pattern.
+The framework is designed with scalability, maintainability, and code reusability in mind by implementing the **Page Object Model (POM)** design pattern.
 
 It supports Android Emulator, Android Real Device, iOS Simulator, and iOS Real Device (with appropriate configuration).
 
 ---
-
-# ✨ Features
 
 - ✅ Android Automation Testing
 - ✅ iOS Automation Testing
 - ✅ Appium 2
 - ✅ Pytest
 - ✅ Page Object Model (POM)
+- ✅ Driver Factory
+- ✅ Platform-based Configuration
+- ✅ Platform-specific Page Objects
+- ✅ Platform-specific Locators
 - ✅ JSON Test Data
 - ✅ Screenshot on Failure
 - ✅ HTML Report
 - ✅ JSON Report
-- ✅ Cross Platform Structure
-- ✅ Driver Factory
+- ✅ Cross Platform Architecture
 - ✅ Reusable Components
-- ✅ Easy Configuration
+
+---
+
+# 📱 Supported Platforms
+
+| Platform            | Status                               |
+| ------------------- | ------------------------------------ |
+| Android Emulator    | ✅                                   |
+| Android Real Device | ✅                                   |
+| iOS Simulator       | ✅                                   |
+| iOS Real Device     | ✅ (with valid provisioning profile) |
 
 ---
 
@@ -67,16 +82,22 @@ It supports Android Emulator, Android Real Device, iOS Simulator, and iOS Real D
 SELENIUM-PYTHON-MOBILE
 │
 ├── apps/
+│   └── MyDemoAppRN.apk
+│
+├── config/
+│   ├── android_config.py
+│   └── ios_config.py
+│
+├── drivers/
+│   └── driver_factory.py
+│
+├── locators/
 │   ├── android/
 │   └── ios/
 │
-├── config/
-│
-├── drivers/
-│
-├── locators/
-│
 ├── pages/
+│   ├── android/
+│   └── ios/
 │
 ├── reports/
 │   ├── html/
@@ -87,7 +108,11 @@ SELENIUM-PYTHON-MOBILE
 │
 ├── tests/
 │   ├── android/
+│   │   └── test_android_login.py
+│   │
 │   └── ios/
+│       ├── test_ios_login.py
+│       └── test_ios_products.py
 │
 ├── utils/
 │
@@ -96,8 +121,6 @@ SELENIUM-PYTHON-MOBILE
 ├── requirements.txt
 └── README.md
 ```
-
----
 
 # 🏗 Architecture
 
@@ -108,14 +131,19 @@ A[Test Cases]
 B[Page Objects]
 C[Locators]
 D[Driver Factory]
-E[Appium Server]
-F[Android / iOS Device]
+E[Android Config]
+F[iOS Config]
+G[Appium Server]
+H[Android Emulator / Android Device / iOS Simulator / iOS Device]
 
 A --> B
 B --> C
 B --> D
 D --> E
-E --> F
+D --> F
+E --> G
+F --> G
+G --> H
 ```
 
 ---
@@ -145,53 +173,53 @@ Page-->>Test: Assertion
 
 # 🛠 Technology Stack
 
-| Category | Technology |
-|----------|------------|
-| Language | Python 3.12 |
-| Framework | Pytest |
-| Mobile Automation | Appium 2 |
-| Pattern | Page Object Model |
-| Platform | Android & iOS |
-| Reporting | pytest-html |
-| Test Data | JSON |
+| Category          | Technology              |
+| ----------------- | ----------------------- |
+| Language          | Python 3.12             |
+| Framework         | Pytest                  |
+| Mobile Automation | Appium 2                |
+| Pattern           | Page Object Model (POM) |
+| Platform          | Android & iOS           |
+| Reporting         | pytest-html             |
+| Test Data         | JSON                    |
 
 ---
 
 # 📦 Installation
 
-Clone repository
+Clone the repository
 
 ```bash
 git clone https://github.com/naufalazhar65/SELENIUM-PYTHON-MOBILE.git
 ```
 
-Go to project
+Navigate to the project directory
 
 ```bash
 cd SELENIUM-PYTHON-MOBILE
 ```
 
-Create virtual environment
+Create a virtual environment
 
 ```bash
 python3 -m venv .venv
 ```
 
-Activate
+Activate the virtual environment
 
-macOS / Linux
+### macOS / Linux
 
 ```bash
 source .venv/bin/activate
 ```
 
-Windows
+### Windows
 
 ```bash
 .venv\Scripts\activate
 ```
 
-Install dependencies
+Install project dependencies
 
 ```bash
 pip install -r requirements.txt
@@ -219,13 +247,13 @@ Install iOS Driver
 appium driver install xcuitest
 ```
 
-Verify
+Verify installed drivers
 
 ```bash
 appium driver list
 ```
 
-Start Appium
+Start the Appium server
 
 ```bash
 appium server
@@ -233,30 +261,117 @@ appium server
 
 ---
 
+# 📱 Test Applications
+
+## Android
+
+Android automation uses the APK included in this repository.
+
+```text
+apps/
+└── MyDemoAppRN.apk
+```
+
+## iOS
+
+The iOS application is installed through **Xcode** and launched using its **Bundle ID**.
+
+```python
+options.set_capability(
+    "bundleId",
+    "com.saucelabs.mydemo.app.ios"
+)
+```
+
+> **Note**
+>
+> The original iOS demo application package is no longer compatible with the latest iOS versions. Therefore, the application is installed via Xcode and launched using its Bundle ID.
+
+---
+
+---
+
+# ⚙ Configuration
+
+## Android
+
+Android automation launches the application directly from the APK stored in the project.
+
+```text
+apps/
+└── MyDemoAppRN.apk
+```
+
+Configuration is located in:
+
+```text
+config/android_config.py
+```
+
+---
+
+## iOS
+
+iOS automation uses an application already installed on the iOS Simulator or a real device.
+
+Instead of providing an `.app` file, Appium launches the application using its **Bundle ID**.
+
+Example:
+
+```python
+options.set_capability("bundleId", "com.saucelabs.mydemo.app.ios")
+```
+
+Configuration is located in:
+
+```text
+config/ios_config.py
+```
+
+> **Note**
+>
+> The iOS application is not included in this repository. It must be installed on the simulator or device before running the tests.
+
+---
+
 # ▶ Running Tests
 
-Android
+Run all Android tests
 
 ```bash
 pytest tests/android
 ```
 
-iOS
+Run all iOS tests
 
 ```bash
 pytest tests/ios
 ```
 
-Specific Test
+Run tests by marker
+
+Android
 
 ```bash
-pytest tests/android/test_login.py
+pytest -m android
 ```
 
-Specific Test Method
+iOS
 
 ```bash
-pytest tests/android/test_login.py::TestLogin::test_success_login
+pytest -m ios
+```
+
+Run a specific test file
+
+```bash
+pytest tests/android/test_android_login.py
+```
+
+Run a specific test case
+
+```bash
+pytest tests/android/test_android_login.py::TestLogin::test_success_login
 ```
 
 ---
@@ -275,7 +390,7 @@ Generate JSON Report
 pytest --json-report --json-report-file=reports/json/output.json
 ```
 
-Report Structure
+Report directory
 
 ```text
 reports/
@@ -288,7 +403,7 @@ reports/
 
 # 📸 Screenshot on Failure
 
-Whenever a test fails, a screenshot is automatically captured.
+Whenever a test fails, a screenshot is automatically captured and stored in:
 
 ```text
 reports/screenshots/
@@ -298,40 +413,54 @@ reports/screenshots/
 
 # 📖 Design Pattern
 
-The framework implements the **Page Object Model (POM)**.
+This framework implements the **Page Object Model (POM)** to improve maintainability and code reusability.
 
 ```text
 Tests
-    │
-    ▼
+   │
+   ▼
 Pages
-    │
-    ▼
+   │
+   ▼
 Locators
-    │
-    ▼
+   │
+   ▼
 Driver Factory
+   │
+   ▼
+Platform Configuration
+   │
+   ▼
+Appium Server
+   │
+   ▼
+Android / iOS Device
 ```
 
-### Benefits
+## Benefits
 
 - Better Maintainability
 - High Reusability
 - Easy Debugging
 - Clean Test Scripts
 - Scalable Framework
+- Platform Separation
+- Centralized Driver Management
 
 ---
 
 # 🚀 Future Improvements
 
-- GitHub Actions
+- GitHub Actions CI/CD
+- Parallel Test Execution
 - Allure Report
-- Docker
-- Jenkins
-- BrowserStack
-- Sauce Labs
-- Parallel Execution
+- Docker Support
+- BrowserStack Integration
+- Sauce Labs Integration
+- Jenkins Pipeline
+- Environment Configuration (.env)
+- YAML-based Device Configuration
+- Logging Enhancement
 - Slack Notification
 - Telegram Notification
 

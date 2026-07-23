@@ -1,5 +1,5 @@
-from pages.base_page import BasePage
-from locators.login_locator import LoginLocator
+from pages.ios.base_page import BasePage
+from locators.ios.login_locator import LoginLocator
 
 
 class LoginPage(BasePage):

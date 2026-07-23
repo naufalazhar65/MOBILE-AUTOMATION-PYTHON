@@ -1,6 +1,9 @@
-from pages.products_page import ProductsPage
+from pages.ios.products_page import ProductsPage
 
+import pytest
 
+@pytest.mark.ios
+@pytest.mark.regression
 def test_sort_price_ascending(driver):
 
     product = ProductsPage(driver)

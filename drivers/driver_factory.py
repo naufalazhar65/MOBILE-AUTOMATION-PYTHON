@@ -1,9 +1,7 @@
 from appium import webdriver
-from appium.options.android import UiAutomator2Options
-from appium.options.ios import XCUITestOptions
 
-from config.android_config import get_android_capabilities
-from config.ios_config import get_ios_capabilities
+from config.android_config import get_android_options
+from config.ios_config import get_ios_options
 
 
 class DriverFactory:
@@ -12,24 +10,17 @@ class DriverFactory:
     def create(platform):
 
         if platform.lower() == "android":
-
-            options = UiAutomator2Options().load_capabilities(
-                get_android_capabilities()
-            )
+            options = get_android_options()
 
         elif platform.lower() == "ios":
-
-            options = XCUITestOptions().load_capabilities(
-                get_ios_capabilities()
-            )
+            options = get_ios_options()
 
         else:
-
             raise ValueError(
                 f"Platform '{platform}' is not supported."
             )
 
         return webdriver.Remote(
-    "http://127.0.0.1:4723",
-    options=options
-)
+            "http://127.0.0.1:4723",
+            options=options,
+        )

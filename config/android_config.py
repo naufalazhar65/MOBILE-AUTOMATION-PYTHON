@@ -1,16 +1,19 @@
 from pathlib import Path
 
-# Path APK
+from appium.options.android import UiAutomator2Options
+
 APP_PATH = Path(__file__).resolve().parent.parent / "apps" / "MyDemoAppRN.apk"
 
 
-def get_android_capabilities():
-    return {
-        "platformName": "Android",
-        "appium:automationName": "UiAutomator2",
-        "appium:deviceName": "Google Pixel 4",
-        "appium:platformVersion": "12",
-        "appium:udid": "emulator-5554",
-        "appium:noReset": False,
-        "appium:app": str(APP_PATH),
-    }
+def get_android_options():
+    options = UiAutomator2Options()
+
+    options.platform_name = "Android"
+    options.set_capability("automationName", "UiAutomator2")
+    options.set_capability("deviceName", "Google Pixel 4")
+    options.set_capability("platformVersion", "12")
+    options.set_capability("udid", "emulator-5554")
+    options.set_capability("noReset", False)
+    options.set_capability("app", str(APP_PATH))
+
+    return options

@@ -1,7 +1,9 @@
-from pages.login_page import LoginPage
+from pages.ios.login_page import LoginPage
 from utils.helpers import load_json
+import pytest
 
-
+@pytest.mark.ios
+@pytest.mark.regression
 def test_login(driver):
 
     # Load test data
