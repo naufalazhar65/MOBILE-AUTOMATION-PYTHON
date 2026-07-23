@@ -688,7 +688,7 @@ The notification includes:
 > Coming Soon
 
 <!--
-![Telegram Notification](docs/images/Telegram-Report.png)
+![Telegram Notification](docs/images/telegram-report.png)
 -->
 
 ---
